@@ -1,0 +1,22 @@
+
+FROM node:14
+
+
+WORKDIR /src
+
+COPY package*.json ./
+
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+EXPOSE 3000 
+# EXPOSE should be set to the correct port on host machine in docker compose file
+# First docker build -t sample -f Dockerfile.prod .
+# Second docker run -p 8000:3000 sample
+
+# Start the app
+CMD ["npm", "start"]
